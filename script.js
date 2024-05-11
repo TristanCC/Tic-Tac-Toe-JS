@@ -101,13 +101,19 @@ function Cell(row,column) {
         // check win return (1 = currentplayer wins) (2 = draw)
         // if winner !== 0, end game
 
-        let currentPlayer = Players[0]
+        // TODO: make pickCell() take user input
+
+        let currentPlayer = Players[0] // Player one always makes first move
         let winner = 0
 
-        while (!winner) {
-            
-        }
+        // how best to structure game loop?
         
+        if (winner === 1) {
+            console.log(`${currentPlayer.name} is the winner!`)
+        }
+        if (winner === 2) {
+            console.log("Draw! Play again?")
+        }
     }
     gameLoop()
 })()
