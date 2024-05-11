@@ -36,20 +36,23 @@ function Gameboard() {
         // Check rows
         for (let i=0; i<3; i++) {
             if (board[i][0] === board[i][1] && board[i][1] === board[i][2]) {
-                return board[i][0]
+                return 1
             }
             if (board[0][i] === board[1][i] && board[1][i] === board[2][i]) {
-                return board[0][i]
+                return 1
             }
         }
         if (board[0][0] === board[1][1] && board[1][1] === board[2][2]) {
-            return board[0][0]
+            return 1
         }
         if (board[0][2] === board[1][1] && board[1][1] === board[2][0]) {
-            return board[0][2]
+            return 1
         }
         else if (checkAvailable().length === 0) {
-            return 0
+            return 2 // 2 = out of cells = draw
+        }
+        else {
+            return 0 // continue game loop
         }
     }
     return {board, pickCell, checkWin, checkAvailable,}
@@ -95,13 +98,15 @@ function Cell(row,column) {
         // loop until either winner or no more available cells
         // if current player === playerOne, switch to playerTwo, vice versa
         // pick cell
-        // check win return (1 = currentplayer wins) (0 = draw)
+        // check win return (1 = currentplayer wins) (2 = draw)
         // if winner !== 0, end game
 
         let currentPlayer = Players[0]
         let winner = 0
 
-        
+        while (!winner) {
+            
+        }
         
     }
     gameLoop()
