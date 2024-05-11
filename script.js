@@ -12,19 +12,13 @@ function Gameboard() {
 
     const pickCell = (player, rowSel, columnSel) => {
         // Check for empty cells
-        const availableCells = [];
-        for (let i = 0; i < board.length; i++) {
-            for (let j = 0; j < board[i].length; j++) {
-                const cell = board[i][j];
-                if (cell.getValue() === 0) {
-                    availableCells.push(cell);
-                }
-            }
-        }
+        const availableCells = board.flat().filter(cell => cell.getValue === 0);
+        // Find the selected cell based on row and column selection
+        const selectedCell = availableCells.find(cell => cell.row === rowSel && cell.column === columnSel);
+    
         console.log(availableCells);
         // if player selection is in available cells = valid move. else = invalid
         // how to get player selection?
-        const selectedCell = availableCells.find(cell => cell.row === rowSel && cell.column === columnSel);
         if(selectedCell.getValue() === 0) {
             selectedCell.changeValue(player.token)
             console.log(`valid move, selected cell new value = ${selectedCell.getValue()}`)
