@@ -6,34 +6,53 @@ function Gameboard() {
         for (let j=0; j<3; j++) {
             const cell = Cell(i,j); // Create a new Cell object with coordinates
             board[i].push(cell); // Push the cell into the board
-            
+
         }
     }
 
+    const checkAvailable = () => {
+        // Filter available cells
+        const availableCells = board.flat().filter(cell => cell.getValue() === 0);
+        return availableCells
+    }
+
     const pickCell = (player, rowSel, columnSel) => {
-        // Check for empty cells
-        const availableCells = board.flat().filter(cell => cell.getValue === 0);
-        // Find the selected cell based on row and column selection
+        // Filter available cells
+        const availableCells = checkAvailable();
+        // Find selected cell
         const selectedCell = availableCells.find(cell => cell.row === rowSel && cell.column === columnSel);
     
-        console.log(availableCells);
-        // if player selection is in available cells = valid move. else = invalid
-        // how to get player selection?
-        if(selectedCell.getValue() === 0) {
-            selectedCell.changeValue(player.token)
-            console.log(`valid move, selected cell new value = ${selectedCell.getValue()}`)
+        // Check if selected cell is valid
+        if (selectedCell) {
+            selectedCell.changeValue(player.token);
+            console.log(`Valid move, selected cell new value = ${selectedCell.getValue()}`);
+        } else {
+            console.log("Invalid move");
         }
-        else {
-            console.log("invalid move")
-        }
-        
-        
-
-        
-
-
     };
-    return {board, pickCell}
+
+    const checkWin = () => {
+
+        // Check rows
+        for (let i=0; i<3; i++) {
+            if (board[i][0] === board[i][1] && board[i][1] === board[i][2]) {
+                return board[i][0]
+            }
+            if (board[0][i] === board[1][i] && board[1][i] === board[2][i]) {
+                return board[0][i]
+            }
+        }
+        if (board[0][0] === board[1][1] && board[1][1] === board[2][2]) {
+            return board[0][0]
+        }
+        if (board[0][2] === board[1][1] && board[1][1] === board[2][0]) {
+            return board[0][2]
+        }
+        else if (checkAvailable().length === 0) {
+            return 0
+        }
+    }
+    return {board, pickCell, checkWin, checkAvailable,}
 };
 
 function Cell(row,column) {
@@ -61,7 +80,6 @@ function Cell(row,column) {
 (function Gamecontroller() {
 
     const gameboard = Gameboard()
-    gameboard.board[1][0].changeValue(5)
 
     const Players = [{
         name: "playerOne",
@@ -72,6 +90,19 @@ function Cell(row,column) {
         token: "2"
     }]
 
-    gameboard.pickCell(Players[0],1,1)
-    console.log(Players[0].name)
+    function gameLoop() {
+        // track current player, winner = 0
+        // loop until either winner or no more available cells
+        // if current player === playerOne, switch to playerTwo, vice versa
+        // pick cell
+        // check win return (1 = currentplayer wins) (0 = draw)
+        // if winner !== 0, end game
+
+        let currentPlayer = Players[0]
+        let winner = 0
+
+        
+        
+    }
+    gameLoop()
 })()
