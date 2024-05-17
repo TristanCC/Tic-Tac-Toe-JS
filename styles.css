@@ -1,0 +1,59 @@
+/* styles.css */
+
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    font-family: sans-serif;
+}
+
+.hero-title {
+    background-color: lightskyblue;
+    color:white;
+}
+
+.wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.container {
+    background-color: black;
+}
+
+.grid {
+    background-color: black;
+    display: grid;
+    aspect-ratio: 1 / 1; /* Maintain square aspect ratio */
+    grid-template-columns: repeat(3, 1fr); /* 3 columns with equal width */
+    grid-template-rows: repeat(3, 1fr); /* 3 rows with equal height */
+    border: .1em solid black;
+    width: 50vmin; /* Use vmin to maintain size based on viewport */
+    height: 50vmin; /* Use vmin to maintain size based on viewport */
+    justify-items: center;
+    align-items: center;
+    gap: .1em; /* Adjust gap between items */
+    font-size: 200%;
+    font-weight: bolder;
+}
+
+.grid-item {
+    display: flex;
+    background-color: white;
+    width: 90%;
+    height: 90%;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.grid-item:hover {
+    background-color: green;
+}

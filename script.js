@@ -85,8 +85,8 @@ function Cell(row, column) {
         let currentPlayer = Players[0]; // Player one always makes first move
 
         while (winner === 0) {
-            let rowSel = parseInt(prompt("Choose row (0-2):", 0));
-            let colSel = parseInt(prompt("Choose column (0-2):", 0));
+            //let rowSel = parseInt(prompt("Choose row (0-2):", 0));
+            //let colSel = parseInt(prompt("Choose column (0-2):", 0));
 
             // Validate user input
             if (isNaN(rowSel) || isNaN(colSel) || rowSel < 0 || rowSel > 2 || colSel < 0 || colSel > 2) {
@@ -94,13 +94,13 @@ function Cell(row, column) {
                 continue;
             }
 
-            console.log("Pre selection value: ", gameboard.board[rowSel][colSel].getValue());
-
-            gameboard.pickCell(currentPlayer, rowSel, colSel);
-
-            console.log("Post selection value: ", gameboard.board[rowSel][colSel].getValue());
-
-            winner = gameboard.checkWin();
+           // console.log("Pre selection value: ", gameboard.board[rowSel][colSel].getValue());
+//
+           // gameboard.pickCell(currentPlayer, rowSel, colSel);
+//
+           // console.log("Post selection value: ", gameboard.board[rowSel][colSel].getValue());
+//
+           // winner = gameboard.checkWin();
 
             // Change current player logic after action if no winner yet
             if (winner === 0) {
