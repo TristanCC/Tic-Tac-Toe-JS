@@ -12,9 +12,58 @@ body, html {
     font-family: sans-serif;
 }
 
+button {
+    background-color: lightskyblue;
+    color: white;
+    border: .5em lightskyblue solid;
+    border-radius: 1em;
+}
+
+button:hover {
+    background-color: lightcoral;
+    border: lightcoral .5em solid;
+}
+
+.winner-wrap {
+    display: flex;
+    flex-direction: column;
+    flex:auto;
+    justify-content: center;
+    align-items: center;
+
+}
+
+h2 {
+    margin-bottom: 0;
+}
+
+.winner-name {
+    margin:0;
+}
+
+.winModal {
+    padding: 2em;
+    display: flex;
+    position: absolute;
+    left:auto; 
+    top:auto;
+    width:25%;
+    background-color: rgba(255, 255, 255, 0.90);
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    border-radius: 1em;
+    aspect-ratio: 16/9;
+    visibility: hidden;
+}
+img {
+    left: auto;
+    right: auto;
+}
+
 .hero-title {
     background-color: lightskyblue;
     color:white;
+    border-radius: 1em;
+    padding: .5em;
 }
 
 .wrapper {
@@ -25,16 +74,16 @@ body, html {
 }
 
 .container {
-    background-color: black;
 }
 
 .grid {
-    background-color: black;
+    background-color: lightcoral;
     display: grid;
     aspect-ratio: 1 / 1; /* Maintain square aspect ratio */
     grid-template-columns: repeat(3, 1fr); /* 3 columns with equal width */
     grid-template-rows: repeat(3, 1fr); /* 3 rows with equal height */
-    border: .1em solid black;
+    border: .2em solid lightcoral;
+    border-radius: .5em;
     width: 50vmin; /* Use vmin to maintain size based on viewport */
     height: 50vmin; /* Use vmin to maintain size based on viewport */
     justify-items: center;
@@ -51,9 +100,11 @@ body, html {
     height: 90%;
     justify-content: center;
     align-items: center;
+    border: .1em solid lightcoral;
+    border-radius: .5em;
 
 }
 
 .grid-item:hover {
-    background-color: green;
+    background-color: lightskyblue;
 }

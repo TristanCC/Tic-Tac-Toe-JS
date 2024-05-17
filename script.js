@@ -1,3 +1,7 @@
+function refresh() {
+    window.location.reload()
+}
+
 function Gameboard() {
     const board = [];
     for (let i = 0; i < 3; i++) {
@@ -7,6 +11,7 @@ function Gameboard() {
             board[i].push(cell); // Push the cell into the board
         }
     }
+
 
     const checkAvailable = () => {
         // Filter available cells
@@ -76,46 +81,58 @@ function Cell(row, column) {
     const gameboard = Gameboard();
 
     const Players = [
-        { name: "playerOne", token: "1" },
-        { name: "playerTwo", token: "2" }
+        { name: "playerOne", token: "X" },
+        { name: "playerTwo", token: "O" }
     ];
 
-    function gameLoop() {
-        let winner = 0;
-        let currentPlayer = Players[0]; // Player one always makes first move
+    var currentPlayer = Players[0]
+    // Function to handle player move
+    function handleMove(event) {
+        const target = event.target;
+        const row = parseInt(target.getAttribute('data-row'));
+        const column = parseInt(target.getAttribute('data-column'));
 
-        while (winner === 0) {
-            //let rowSel = parseInt(prompt("Choose row (0-2):", 0));
-            //let colSel = parseInt(prompt("Choose column (0-2):", 0));
-
-            // Validate user input
-            if (isNaN(rowSel) || isNaN(colSel) || rowSel < 0 || rowSel > 2 || colSel < 0 || colSel > 2) {
-                console.log("Invalid input. Please choose numbers between 0 and 2.");
-                continue;
-            }
-
-           // console.log("Pre selection value: ", gameboard.board[rowSel][colSel].getValue());
-//
-           // gameboard.pickCell(currentPlayer, rowSel, colSel);
-//
-           // console.log("Post selection value: ", gameboard.board[rowSel][colSel].getValue());
-//
-           // winner = gameboard.checkWin();
-
-            // Change current player logic after action if no winner yet
-            if (winner === 0) {
-                currentPlayer = currentPlayer === Players[0] ? Players[1] : Players[0];
-                console.log(`${currentPlayer.name}'s turn`);
-            }
+        // Call pickCell function and update UI
+        if (gameboard.board[row][column].getValue() === null) {
+            gameboard.pickCell(currentPlayer, row, column);
+            target.innerHTML = currentPlayer.token;
         }
 
+        // Check for win or draw
+        const winner = gameboard.checkWin();
+        console.log(`this is winner value : ${winner}`);
         if (winner === 1) {
             console.log(`${currentPlayer.name} is the winner!`);
-        }
-        if (winner === 2) {
+            var winnerName = document.querySelector(".winner-name");
+            var winModal = document.querySelector(".winModal");
+            winModal.style.visibility = "visible";
+            winnerName.innerHTML = `<h3>${currentPlayer.name}</h3>`;
+
+            // Load and append the confetti script
+            function loadConfettiScript() {
+                if (!document.getElementById('confettiScript')) {
+                    const script = document.createElement('script');
+                    script.src = 'https://run.confettipage.com/here.js';
+                    script.id = 'confettiScript';
+                    script.setAttribute('data-confetticode', 'U2FsdGVkX1/kk2Se+J9w3en2Iq895Utz6HlDLhrBVsBN7EOElOgFuLuwBi/jFUu3WL4U1Uze0a0kPD/W+2+fGokhLe0QCXs2j7lzd5xmi3A1hTyD7yoYjRG6AoYwGlL6o2/wqpqSiTlq95t7AR1GBjBSUcQLy7qgYVbL4YPaR9/AvC4MqhLYBwzuzMfAqX1UtPv/6KW5rdLw9EJHfiw64atDSR1zQIa3ukHLA9rRrypfdNUR9CeKjYrfdeqtSEC2LSQgoymFZseoGwFHO9CD2xfUrqivu8nZoPkG5biA7AB9o1geXM8O/fWB08r9vr2XTQTxl+E9m8251EdhLMYVVqZROeY7zLD3amkXdodwPSYEEnG5hX2lVIjb+1jtf9mwebQmT9MsQ4XjIuz4QoS8kV4mrfVxgpfwpkV/d0zYeM+A8XO83mJ8u/DR1mL+tk14OcaUtTDYK83keDtsni6VTBafzLbHbMvHB4TRmpjw1V9yni7QwpAA03rTePZlyKMZ0Lrk05d3E13lB51xknMbLQoQA7HPfhWZIm27TzMuCDfhCeK9viig87QUWFrlig8RZWEs3++etyoKhRioGqw1iU4QibFFrg+n/rQEw/PRSuVqp5qomDK6ErgpfjtOvJFWZDbC4JvJ6tp7E5SU7g6Vv3omSQwvMzCuqsQcDQwfTXK9ROCiVw5FOoPyDTeSwjUI');
+                    document.body.appendChild(script);
+                }
+            }
+
+            loadConfettiScript();
+        } else if (winner === 2) {
             console.log("Draw! Play again?");
+        } else {
+            // Switch to the next player
+            currentPlayer = currentPlayer === Players[0] ? Players[1] : Players[0];
+            console.log(`${currentPlayer.name}'s turn`);
         }
     }
 
-    gameLoop();
+    // Add event listener to the parent container
+    const gameBoardContainer = document.getElementById('game-board');
+    gameBoardContainer.addEventListener('click', handleMove);
 })();
+
+
+//<script src="https://run.confettipage.com/here.js" data-confetticode="U2FsdGVkX1/kk2Se+J9w3en2Iq895Utz6HlDLhrBVsBN7EOElOgFuLuwBi/jFUu3WL4U1Uze0a0kPD/W+2+fGokhLe0QCXs2j7lzd5xmi3A1hTyD7yoYjRG6AoYwGlL6o2/wqpqSiTlq95t7AR1GBjBSUcQLy7qgYVbL4YPaR9/AvC4MqhLYBwzuzMfAqX1UtPv/6KW5rdLw9EJHfiw64atDSR1zQIa3ukHLA9rRrypfdNUR9CeKjYrfdeqtSEC2LSQgoymFZseoGwFHO9CD2xfUrqivu8nZoPkG5biA7AB9o1geXM8O/fWB08r9vr2XTQTxl+E9m8251EdhLMYVVqZROeY7zLD3amkXdodwPSYEEnG5hX2lVIjb+1jtf9mwebQmT9MsQ4XjIuz4QoS8kV4mrfVxgpfwpkV/d0zYeM+A8XO83mJ8u/DR1mL+tk14OcaUtTDYK83keDtsni6VTBafzLbHbMvHB4TRmpjw1V9yni7QwpAA03rTePZlyKMZ0Lrk05d3E13lB51xknMbLQoQA7HPfhWZIm27TzMuCDfhCeK9viig87QUWFrlig8RZWEs3++etyoKhRioGqw1iU4QibFFrg+n/rQEw/PRSuVqp5qomDK6ErgpfjtOvJFWZDbC4JvJ6tp7E5SU7g6Vv3omSQwvMzCuqsQcDQwfTXK9ROCiVw5FOoPyDTeSwjUI"></script>

@@ -11,21 +11,29 @@
     <span><h1 class="hero-title">Tic-Tac-Toe</h1></span>
     <div class="wrapper">
         <div class="container">
-            <div class="grid">
-                <div class="grid-item"> </div>
-                <div class="grid-item"> </div>
-                <div class="grid-item"> </div>
-                <div class="grid-item"> </div>
-                <div class="grid-item"> </div>
-                <div class="grid-item"> </div>
-                <div class="grid-item"> </div>
-                <div class="grid-item"> </div>
-                <div class="grid-item"> </div>
+            <div class="game-board grid" id="game-board">
+                <div class="grid-item" data-row="0" data-column="0"> </div>
+                <div class="grid-item" data-row="0" data-column="1"> </div>
+                <div class="grid-item" data-row="0" data-column="2"> </div>
+                <div class="grid-item" data-row="1" data-column="0"> </div>
+                <div class="grid-item" data-row="1" data-column="1"> </div>
+                <div class="grid-item" data-row="1" data-column="2"> </div>
+                <div class="grid-item" data-row="2" data-column="0"> </div>
+                <div class="grid-item" data-row="2" data-column="1"> </div>
+                <div class="grid-item" data-row="2" data-column="2"> </div>
             </div>
         </div>
     </div>
     <h2>by Tristan Johnston 😊</h2>
-
+    <div class="winModal">
+        <img src="/winner.gif" alt="">
+        <div class="winner-wrap">
+            <h2>WINNER!</h2>
+            <h3 class="winner-name"></h3>
+            <button onclick="refresh()">Play Again?</button>
+        </div>
+    </div>
     <script src="script.js"></script>
+    
 </body>
 </html>
